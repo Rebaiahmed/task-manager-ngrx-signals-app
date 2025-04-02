@@ -1,0 +1,7 @@
+<div class="container d-flex justify-content-center">
+  <mat-form-field appearance="outline" style="width: 500px;">
+    <mat-label>Task Title</mat-label>
+    <input matInput [formControl]="taskControl" placeholder="Enter task title">
+    <button mat-raised-button matSuffix color="primary" (click)="addTask()">Add Task</button>
+  </mat-form-field>
+</div>
