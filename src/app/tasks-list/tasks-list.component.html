@@ -1,13 +1,14 @@
 <mat-list>
     @for (task of tasks(); track task.id) {
-      <mat-list-item>
+      <mat-list-item class="task-item">
         <mat-checkbox
           [checked]="task.completed"
           (change)="toggleCompleted(task, $event.checked)"
         >
           {{ task.title }}
         </mat-checkbox>
-        <button (click)="deleteTask(task.id)">Delete</button>
+          <button mat-raised-button color="warn" (click)="deleteTask(task.id)">Delete</button>
+       
       </mat-list-item>
     }
     @empty {

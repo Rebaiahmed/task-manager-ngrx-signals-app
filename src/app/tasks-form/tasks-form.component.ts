@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { TasksStore } from '../state/task.store';
+import { Task } from '../task';
 
 @Component({
   selector: 'app-tasks-form',
@@ -14,13 +15,21 @@ import { TasksStore } from '../state/task.store';
 export class TasksFormComponent {
 
   taskControl = new FormControl('');
-  newTaskTitle = signal(''); // Input signal
   tasksStore = inject(TasksStore);
+  nextId: number = this.tasksStore.tasksCount()+1;
 
   addTask() {
-    if (this.newTaskTitle().trim()) {
-      this.newTaskTitle.set(''); // Clear input after adding
-    }
+    const taskTitle = this.taskControl.value || '';
+    if (taskTitle) {
+      const newTask: Task = {
+        id: this.nextId++,
+        title: taskTitle,
+        completed: false
+      };
+      this.tasksStore.addTodo(newTask);
+      this.taskControl.reset('');
+    
   }
+}
 
 }
