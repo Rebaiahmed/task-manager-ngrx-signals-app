@@ -1,14 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TasksStore } from '../state/task.store';
-import { MatListModule } from '@angular/material/list';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { CommonModule } from '@angular/common';
 import { Task } from '../task';
-import { MatButtonModule } from '@angular/material/button';
-
 @Component({
   selector: 'app-tasks-list',
-  imports: [CommonModule, MatListModule, MatCheckboxModule,MatButtonModule],
+  imports: [CommonModule],
   templateUrl: './tasks-list.component.html',
   styleUrl: './tasks-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,12 +15,13 @@ export class TasksListComponent {
   tasks = this.tasksStore.tasks;
 
 
-  toggleCompleted(task: Task, completed: boolean): void {
-    //this.tasksStore.updateTask(task.id, { completed });
+  toggleCompleted(task: Task, event: Event): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.tasksStore.updateTask(task.id, { completed: isChecked });
   }
 
   deleteTask(taskId: number): void {
-    this.tasksStore.removeTodo(taskId);
+    this.tasksStore.removeTask(taskId);
   }
 
 }

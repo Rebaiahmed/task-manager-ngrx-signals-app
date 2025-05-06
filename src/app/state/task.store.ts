@@ -26,12 +26,12 @@ export const TasksStore = signalStore(
     tasksCount: computed(() => tasks().length),
   })),
   withMethods((store) => ({
-    addTodo(todo: Task): void {
+    addTask(todo: Task): void {
         patchState(store, {
           tasks: [...store.tasks() as Task[], todo]
      });
     },
-    removeTodo(id: number): void {
+    removeTask(id: number): void {
       patchState(store, {
         tasks: (store.tasks() as Task[]).filter(task => task.id !== id)
       });

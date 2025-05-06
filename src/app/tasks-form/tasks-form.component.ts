@@ -1,14 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
 import { TasksStore } from '../state/task.store';
 import { Task } from '../task';
 
 @Component({
   selector: 'app-tasks-form',
-  imports: [CommonModule, FormsModule,ReactiveFormsModule,MatInputModule, MatButtonModule],
+  imports: [CommonModule, FormsModule,ReactiveFormsModule],
   templateUrl: './tasks-form.component.html',
   styleUrl: './tasks-form.component.scss'
 })
@@ -26,7 +24,7 @@ export class TasksFormComponent {
         title: taskTitle,
         completed: false
       };
-      this.tasksStore.addTodo(newTask);
+      this.tasksStore.addTask(newTask);
       this.taskControl.reset('');
     
   }
