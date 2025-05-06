@@ -1,60 +1,24 @@
-# TaskManagerNgrxSignalsApp
+# Task Manager App with NgRx Signal Store
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
+This is a simple **Task Manager App** built using **Angular** and **NgRx Signal Store**, showcasing the new **Signal API** introduced in recent Angular versions for enhanced reactivity and performance.
 
-## Development server
+For a detailed explanation, you can read the full blog here: [Task Manager App with NgRx Signal Store](https://ahmedrebai.medium.com/task-manager-app-with-ngrx-signal-store-%EF%B8%8F-2cc4bd551c1d)
 
-To start a local development server, run:
+## Features:
+- Create, list, and delete tasks.
+- Tasks are managed using NgRx Signal Store.
+- Uses Bootstrap for UI styling.
 
-```bash
-ng serve
-```
+## Signal Store Methods
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+In this project, we define the following **Signal Store methods** to manage the state of tasks:
 
-## Code scaffolding
+### `addTask(task: Task): void`
+Adds a new task to the store.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# -task-manager-ngrx-signals-app
+```ts
+addTask(task: Task): void {
+  patchState(store, {
+    tasks: [...store.tasks() as Task[], task]
+  });
+}
